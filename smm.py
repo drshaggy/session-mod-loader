@@ -74,7 +74,7 @@ session_path = js["paths"]["session_game"]
 maps = get_custom_maps(session_path + content_path)
 try:
     current_map = get_current_map(session_path + session_config_path)
-except FileNotFoundError:
+except (FileNotFoundError, IndexError) as e:
     current_map = ""
 
 if os.path.exists(session_path + game_patch_path):

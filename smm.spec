@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['smm.py'],
-             pathex=['Z:\\home\\connor\\dev\\python\\session_mod_loader'],
+             pathex=['/home/connor/dev/python/session_mod_loader'],
              binaries=[],
              datas=[],
              hiddenimports=[],
