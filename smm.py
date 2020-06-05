@@ -72,7 +72,10 @@ with open(config_file_loc, 'r') as config_file:
     js = json.loads(config)
 session_path = js["paths"]["session_game"]
 maps = get_custom_maps(session_path + content_path)
-current_map = get_current_map(session_path + session_config_path)
+try:
+    current_map = get_current_map(session_path + session_config_path)
+except FileNotFoundError:
+    current_map = ""
 
 if os.path.exists(session_path + game_patch_path):
     is_patched = 'Game is Patched'
