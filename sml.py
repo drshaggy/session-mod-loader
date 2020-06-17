@@ -22,10 +22,22 @@ def get_custom_maps(path_):
 def update_session_config(path_, map):
     if map == 'Default':
         str_ = '﻿[/Script/EngineSettings.GameMapsSettings]\n\
-GameDefaultMap = /Game/Tutorial/Intro/MAP_EntryPoint'
+GameDefaultMap = /Game/Tutorial/Intro/MAP_EntryPoint\n\
+[/Script/Engine.PhysicsSettings]\n\
+DefaultGravityZ = -980\n\
+\n\
+[/Script/Engine.RendererSettings]\n\
+r.LightPropagationVolume = False\n\
+r.DBuffer = True'
     else:
         str_ = '﻿[/Script/EngineSettings.GameMapsSettings]\n\
-GameDefaultMap = /Game/Art/Env/NYC/' + map
+GameDefaultMap = /Game/Art/Env/NYC/' + map + '\n\
+[/Script/Engine.PhysicsSettings]\n\
+DefaultGravityZ = -980\n\
+\n\
+[/Script/Engine.RendererSettings]\n\
+r.LightPropagationVolume = False\n\
+r.DBuffer = True'
     with open(session_path + session_config_path, 'w') as file:
         file.write(str_)
 
@@ -130,7 +142,10 @@ while True:
             files = glob.glob(map_path + '/*')
             for f in files:
                 file_name = os.path.split(f)[1]
-                copyfile(f, session_path + current_map_path + '/' + file_name)
+                try:
+                    copyfile(f, session_path + current_map_path + '/' + file_name)
+                except IsADirectoryError:
+                    pass
             update_session_config(session_path + session_config_path, selected_map)
             current_map = get_current_map(session_path + session_config_path)
             window.FindElement('current').Update('Current Loaded Map: ' + current_map)
