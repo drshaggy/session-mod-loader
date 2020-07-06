@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pyinstaller -wF smm.py
+pyinstaller -wF sml.py

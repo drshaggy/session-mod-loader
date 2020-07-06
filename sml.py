@@ -6,6 +6,7 @@ import subprocess
 import glob
 from shutil import copyfile
 import zipfile
+import rarfile
 import time
 
 # ---------------------------------------------------------
